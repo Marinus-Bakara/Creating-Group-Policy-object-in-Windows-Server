@@ -12,6 +12,7 @@ In many organizations, end users in certain departments (like HR, due to the sen
 - Active Directory organized into OUs: `HR`, `IT`, `SALES`
 - Test user: `zeno` (member of the `HR` OU)
 - Client machine joined to the domain for testing
+- windows 11
 
 ## Steps
 
@@ -95,10 +96,13 @@ This immediately pulls and applies the latest Computer and User policy settings 
 
 ## Result
 
-The `control panel restriction` GPO, linked to the **HR** OU, successfully blocks all users in that OU — including `zeno` — from accessing Control Panel and PC Settings.
+The `control panel restriction` GPO, linked to the **HR** OU, successfully blocks all users in that OU including `zeno` from accessing Control Panel and PC Settings.
 
 ## Notes
+**Policy** is enforced and locked. Once applied, the setting is greyed out in the user interface so the user or local admin can't change it, and it gets reapplied automatically if someone tries to bypass it. Policies are meant for things you want to control strictly, like password requirements or security settings.
+
+**Preference** this setting stays editable, so a user or local admin can change it afterward and it won't be forced back ,unless you specifically enable the "reapply" option. Preferences are useful for things like mapping drives, setting a default printer, or configuring desktop shortcuts, where you want to seed a value but allow flexibility.
 
 - This policy is a **User Configuration** setting, so it follows the user account regardless of which domain-joined computer they log into, rather than being tied to a specific machine.
-- To exempt specific HR users or groups from this restriction, use **Security Filtering** on the GPO's Scope tab, or move the exception accounts to a different OU.
-- `gpupdate /force` is useful for testing, but in production, policies will apply automatically on the next refresh interval (default ~90 minutes for computers, with some randomization) or at the next logon/reboot.
+- To exempt specific HR users or groups from this restriction, we will use **Security Filtering** on the GPO's Scope tab, or move the exception accounts to a different OU.
+- `gpupdate /force` is useful for testing, but in production, policies will apply automatically on the next refresh interval (default 90 minutes for computers, with some randomization) or at the next logon/reboot.
