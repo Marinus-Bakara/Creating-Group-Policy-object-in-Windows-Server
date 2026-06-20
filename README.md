@@ -78,7 +78,7 @@ On the domain-joined client machine, log in as **zeno** to test the policy from 
 
 ### 11. Confirm the restriction is working
 
-Attempting to open Control Panel now returns a **Restrictions** dialog: *"This operation has been cancelled due to restrictions in effect on this computer. Please contact your system administrator."* This confirms the GPO is applied correctly.
+Attempting to open Control Panel now returns a **Restrictions** dialog: This operation has been cancelled due to restrictions in effect on this computer. Please contact your system administrator. This confirms the GPO is applied correctly.
 
 ![Control Panel restriction confirmed](images/11-restriction-confirmed.png)
 
